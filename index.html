@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>הזמנה ליום הולדת שנה – דילן</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(#f7f9fc, #eef3f8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* כוכבים ברקע */
+    .star {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #b7cde6;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatStar 8s linear infinite;
+    }
+
+    @keyframes floatStar {
+      from {
+        transform: translateY(0);
+        opacity: 0.3;
+      }
+      to {
+        transform: translateY(-120vh);
+        opacity: 0.8;
+      }
+    }
+
+    .invitation {
+      background: #ffffff;
+      width: 360px;
+      max-width: 90%;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* אנימציית נשימה לפיל */
+    .invitation img {
+      width: 100%;
+      border-radius: 18px;
+      margin-bottom: 15px;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      color: #4a6fa5;
+      margin: 10px 0 5px;
+      font-size: 26px;
+    }
+
+    h2 {
+      color: #7a9cc6;
+      margin: 5px 0 15px;
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    .details {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #4a6fa5;
+    }
+
+    button {
+      background: #4a6fa5;
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 0 rgba(74,111,165,0.4); }
+      50% { box-shadow: 0 0 12px rgba(74,111,165,0.6); }
+      100% { box-shadow: 0 0 0 rgba(74,111,165,0.4); }
+    }
+
+    .footer {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    #musicControl {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 22px;
+  background: #ffffffcc;
+  border-radius: 50%;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 10;
+  transition: transform 0.3s, background 0.3s;
+}
+
+#musicControl:hover {
+  transform: scale(1.1);
+  background: #eef3f8;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- כוכבים -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.bottom = Math.random() * 100 + "vh";
+      star.style.animationDelay = Math.random() * 8 + "s";
+      document.body.appendChild(star);
+    }
+  </script>
+
+  <div class="invitation">
+    <div id="musicControl">🎶</div>
+
+<audio id="bgMusic" loop>
+  <source src="lullaby.mp3" type="audio/mpeg">
+</audio>
+
+    <img src="elephent.png" alt="Prince Elephant">
+
+    <h1>🎉 דילן חוגג שנה 🎉</h1>
+    <h2>יום הולדת ראשון ומתוק</h2>
+
+    <div class="details">
+      מוזמנים לחגוג איתנו<br>
+      יום הולדת <span class="highlight">שנה</span> <span class="highlight">לדילן</span> 💙<br><br>
+
+      📅 תאריך: <span class="highlight" id="date"></span><br>
+      ⏰ שעה: <span class="highlight" id="time"></span><br>
+      📍 מקום: <span class="highlight" id="place"></span>
+    </div>
+
+    <button onclick="rsvp()">נשמח לראותכם 🎈</button>
+
+    <div class="footer">
+      באהבה גדולה 💫
+    </div>
+  </div>
+
+  <script>
+    const invitationData = {
+      date: "31/01/2026",
+      time: "12:00",
+      place: "זכרון יעקב 5 פתח תקווה"
+    };
+
+    document.getElementById("date").innerText = invitationData.date;
+    document.getElementById("time").innerText = invitationData.time;
+    document.getElementById("place").innerText = invitationData.place;
+
+    function rsvp() {
+      alert("איזה כיף! מחכים לכם 💙");
+    }
+  </script>
+<script>
+  const music = document.getElementById("bgMusic");
+  const control = document.getElementById("musicControl");
+  let isPlaying = false;
+
+  music.volume = 0.25; // ווליום עדין
+
+  control.addEventListener("click", () => {
+    if (!isPlaying) {
+      music.play();
+      control.innerText = "🔈";
+    } else {
+      music.pause();
+      control.innerText = "🎶";
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
+
+</body>
+</html>
