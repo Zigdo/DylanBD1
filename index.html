@@ -115,7 +115,7 @@
       color: #777;
     }
 
-    #musicControl {
+#musicControl {
   position: fixed;
   top: 15px;
   left: 15px;
@@ -128,6 +128,12 @@
   z-index: 10;
   transition: transform 0.3s, background 0.3s;
 }
+
+#musicControl:hover {
+  transform: scale(1.1);
+  background: #eef3f8;
+}
+
 
 #musicControl:hover {
   transform: scale(1.1);
@@ -177,11 +183,12 @@
 
     <img src="elephent.png" alt="Prince Elephant">
 
-     <div id="musicControl">🎶</div>
+<div id="musicControl">🎶</div>
 
-<audio id="bgMusic" autoplay loop muted>
+<audio id="bgMusic" loop>
   <source src="lullaby.mp3" type="audio/mpeg">
-</audio>    
+</audio>
+  
 
     <h1>🎉 דילן חוגג שנה 🎉</h1>
     <h2>יום הולדת ראשון ומתוק</h2>
@@ -192,7 +199,6 @@
 
       📅 תאריך: <span class="highlight" id="date"></span><br>
       ⏰ שעה: <span class="highlight" id="time"></span><br>
-      📍 מקום: <span class="highlight" id="place"></span>
     </div>
 
     <button onclick="rsvp()">נשמח לראותכם 🎈</button>
@@ -206,12 +212,10 @@
     const invitationData = {
       date: "31/01/2026",
       time: "12:00",
-      place: "זכרון יעקב 5 פתח תקווה"
     };
 
     document.getElementById("date").innerText = invitationData.date;
     document.getElementById("time").innerText = invitationData.time;
-    document.getElementById("place").innerText = invitationData.place;
 
     function rsvp() {
       alert("איזה כיף! מחכים לכם 💙");
@@ -219,16 +223,23 @@
   </script>
 <script>
   const music = document.getElementById("bgMusic");
+  const control = document.getElementById("musicControl");
+  let isPlaying = false;
 
-  music.volume = 0.25;
+  music.volume = 0.25; // ווליום עדין
 
-  function enableSound() {
-    music.muted = false;
-    document.removeEventListener("click", enableSound);
-  }
-
-  document.addEventListener("click", enableSound);
+  control.addEventListener("click", () => {
+    if (!isPlaying) {
+      music.play();
+      control.innerText = "🔈";
+    } else {
+      music.pause();
+      control.innerText = "🎶";
+    }
+    isPlaying = !isPlaying;
+  });
 </script>
+
 
 </body>
 </html>
